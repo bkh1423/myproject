@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>متجر الورود</title>
+</head>
+<body>
+
+    <!-- استدعاء الشريط العلوي -->
+    {% include "header.html" %}
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1>أهلاً بك في عالم الورود</h1>
+                <p>نوصل لك أجمل باقات الورود أينما كنت</p>
+                <a href="#" class="btn">تسوق الآن</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- استدعاء الشريط السفلي -->
+    {% include "footer.html" %}
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Tahoma', sans-serif;
+            background: #fff;
+            color: #333;
+        }
+        .hero {
+            height: 90vh;
+            background: url("https://images.unsplash.com/photo-1509043759401-136742328bb3") no-repeat center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+        .hero::after {
+            content: "";
+            position: absolute;
+            top:0; left:0;
+            width: 100%; height: 100%;
+            background: rgba(231,84,128,0.3); /* طبقة وردية شفافة */
+        }
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        .hero h1 {
+            font-size: 50px;
+            margin-bottom: 15px;
+        }
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 25px;
+        }
+        .btn {
+            padding: 12px 25px;
+            background: #e75480;
+            color: white;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .btn:hover {
+            background: #c7436b;
+        }
+    </style>
+</body>
+</html>
