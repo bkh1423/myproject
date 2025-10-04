@@ -76,13 +76,14 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
-# الملفات الثابتة (Static files)
+# 📌 الملفات الثابتة (Static files)
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     BASE_DIR / "static",   # مسار مجلد static العام
 ]
+STATIC_ROOT = BASE_DIR / "staticfiles"   # مكان التجميع بعد collectstatic
 
-# الملفات المرفوعة (Media files)
+# 📌 الملفات المرفوعة (Media files)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / "media"
 
@@ -90,3 +91,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # ⚠️ تعريف الـ CustomUser
 AUTH_USER_MODEL = 'accounts.CustomUser'
+
