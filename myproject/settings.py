@@ -36,10 +36,12 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'myproject.urls'
 
+# إعدادات القوالب (Templates)
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        # هنا عرفنا مجلد القوالب الرئيسي
+        'DIRS': [BASE_DIR / "templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -74,9 +76,13 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
+# الملفات الثابتة (static files)
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [
+    BASE_DIR / "static",   # لو عندك مجلد static عام
+]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
+# ⚠️ تعريف الـ CustomUser
 AUTH_USER_MODEL = 'accounts.CustomUser'
