@@ -40,7 +40,7 @@ ROOT_URLCONF = 'myproject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        # هنا عرفنا مجلد القوالب الرئيسي
+        # مجلد القوالب الرئيسي
         'DIRS': [BASE_DIR / "templates"],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -76,11 +76,15 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
-# الملفات الثابتة (static files)
-STATIC_URL = 'static/'
+# الملفات الثابتة (Static files)
+STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    BASE_DIR / "static",   # لو عندك مجلد static عام
+    BASE_DIR / "static",   # مسار مجلد static العام
 ]
+
+# الملفات المرفوعة (Media files)
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / "media"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
