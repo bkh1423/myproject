@@ -1,14 +1,17 @@
 from pathlib import Path
 
+# المسار الأساسي للمشروع
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# المفتاح السري (غير مناسب للإنتاج)
 SECRET_KEY = 'django-insecure-69j4j_189r!vq4#999h5=*&d=x)*$t$m#v6z+mgdnix$t=tb$2'
 
+# وضع التطوير
 DEBUG = True
 
 ALLOWED_HOSTS = []
 
-# التطبيقات
+# التطبيقات المثبتة
 INSTALLED_APPS = [
     # تطبيقات Django الافتراضية
     'django.contrib.admin',
@@ -24,6 +27,7 @@ INSTALLED_APPS = [
     'orders',
 ]
 
+# الـ Middleware
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -34,6 +38,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+# ملف روابط المشروع
 ROOT_URLCONF = 'myproject.urls'
 
 # إعدادات القوالب (Templates)
@@ -53,6 +58,7 @@ TEMPLATES = [
     },
 ]
 
+# ملف WSGI
 WSGI_APPLICATION = 'myproject.wsgi.application'
 
 # قاعدة البيانات الافتراضية SQLite
@@ -65,30 +71,40 @@ DATABASES = {
 
 # فحص كلمات المرور
 AUTH_PASSWORD_VALIDATORS = [
-    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',},
-    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',},
-    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',},
-    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',},
+    {
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    },
 ]
 
+# اللغة والمنطقة الزمنية
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
+
 USE_I18N = True
 USE_TZ = True
 
-# 📌 الملفات الثابتة (Static files)
+# 📌 إعدادات الملفات الثابتة (Static files)
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     BASE_DIR / "static",   # مسار مجلد static العام
 ]
 STATIC_ROOT = BASE_DIR / "staticfiles"   # مكان التجميع بعد collectstatic
 
-# 📌 الملفات المرفوعة (Media files)
+# 📌 إعدادات الملفات المرفوعة (Media files)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / "media"
 
+# القيمة الافتراضية للمفاتيح الأساسية
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# ⚠️ تعريف الـ CustomUser
+# ⚠️ تعريف المستخدم المخصص
 AUTH_USER_MODEL = 'accounts.CustomUser'
-
