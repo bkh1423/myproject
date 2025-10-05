@@ -3,12 +3,12 @@
         <div class="logo">🌸 متجر الورود</div>
         <ul class="nav-links">
             <li><a href="/">الرئيسية</a></li>
-            <li><a href="#">المنتجات</a></li>
+            <li><a href="{% url 'product_list' %}">المنتجات</a></li>
             <li><a href="#">العروض</a></li>
             <li><a href="#">اتصل بنا</a></li>
             <li><a href="#">من نحن</a></li>
 
-            <!-- هنا نضيف منطق الحساب -->
+            <!-- منطق الحساب -->
             {% if user.is_authenticated %}
                 <li><a class="btn-auth" href="{% url 'logout' %}">تسجيل خروج</a></li>
                 <li><a class="btn-auth" href="#">حسابي</a></li>
