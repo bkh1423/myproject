@@ -14,16 +14,18 @@ def register_view(request):
             user = form.save()
             login(request, user)
 
-            # ✉️ إرسال رسالة تأكيد للإيميل
-            subject = "Welcome to Flower Store 🌸"
-            message = f"Hello {user.username},\n\nYour account has been created successfully at Flower Store!"
+            # ✉️ إرسال رسالة إلى البريد المدخل
+            subject = "Welcome to Rose Store 🌸"
+            message = f"Hello {user.username},\n\nYour account has been created successfully at Rose Store!"
             from_email = settings.DEFAULT_FROM_EMAIL
             recipient_list = [user.email]
-            send_mail(subject, message, from_email, recipient_list, fail_silently=True)
 
-            # ✅ رسالة نجاح تظهر على الموقع
-            messages.success(request, "🎉 Account created and logged in successfully!")
-            return redirect("/")  # يوديه للهوم
+            # fail_silently=False يخليك تشوف الغلط لو ما انرسل
+            send_mail(subject, message, from_email, recipient_list, fail_silently=False)
+
+            # ✅ رسالة نجاح على الموقع
+            messages.success(request, f"🎉 Account created successfully! Welcome {user.username}")
+            return redirect("home")  # 👈 يوديه للهوم
     else:
         form = RegisterForm()
     return render(request, "accounts/register.html", {"form": form})
@@ -37,7 +39,7 @@ def login_view(request):
             user = form.get_user()
             login(request, user)
             messages.success(request, f"👋 Welcome back, {user.username}!")
-            return redirect("/")
+            return redirect("home")
         else:
             messages.error(request, "❌ Invalid username or password")
     else:
@@ -49,4 +51,5 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     messages.info(request, "🚪 Logged out successfully.")
-    return redirect("/")
+    return redirect("home")
+
