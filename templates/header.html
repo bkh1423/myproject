@@ -106,15 +106,32 @@
       border-color: rgba(236, 72, 153, 1);
     }
 
-    /* 🌙 الوضع الداكن */
-    body.dark {
-        background: #121212;
-        color: #eee;
+    /* 🌙 الوضع الداكن للهيدر */
+    body.dark .navbar {
+        background: #1e1e1e;
+        box-shadow: 0 2px 5px rgba(255,255,255,0.1);
+    }
+    body.dark .nav-links a {
+        color: #ddd;
+    }
+    body.dark .nav-links a:hover {
+        color: #ff99bb;
+    }
+    body.dark .logo {
+        color: #ff99bb;
+    }
+    body.dark .btn-auth {
+        border-color: #ff99bb;
+        color: #ff99bb;
+    }
+    body.dark .btn-auth:hover {
+        background: #ff99bb;
+        color: #fff;
     }
 </style>
 
 <script>
-    // ✅ تبديل بين الوضع الداكن والفاتح
+    // ✅ تبديل بين الوضع الداكن والفاتح مع التخزين
     document.addEventListener("DOMContentLoaded", function() {
         const switchBtn = document.getElementById("darkModeSwitch");
 
@@ -135,4 +152,5 @@
         });
     });
 </script>
+
 
