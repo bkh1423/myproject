@@ -4,11 +4,12 @@ from .models import CustomUser
 
 
 class SimpleUserCreationForm(forms.ModelForm):
+    email = forms.EmailField(label="Email", required=True)  # ✅ إضافة الإيميل
     password = forms.CharField(widget=forms.PasswordInput, label="الرمز")
 
     class Meta:
         model = CustomUser
-        fields = ("username", "password")  # فقط يوزر وباسوورد
+        fields = ("username", "email", "password")  # ✅ صار يشمل الإيميل
 
     def save(self, commit=True):
         user = super().save(commit=False)
@@ -20,8 +21,8 @@ class SimpleUserCreationForm(forms.ModelForm):
 
 
 class SimpleAuthenticationForm(AuthenticationForm):
-    username = forms.CharField(label="اسم المستخدم")
-    password = forms.CharField(widget=forms.PasswordInput, label="الرمز")
+    username = forms.CharField(label="Username")
+    password = forms.CharField(widget=forms.PasswordInput, label="Password")
 
     class Meta:
         model = CustomUser
