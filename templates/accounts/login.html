@@ -6,23 +6,23 @@
     <style>
         body {
             font-family: "Tajawal", sans-serif;
-            background: #fff0f5; /* خلفية وردية فاتحة */
+            background: #fff0f5;
             margin: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
         }
-        .login-container {
+        .form-container {
             background: #fff;
-            padding: 40px 30px;
+            padding: 35px 25px;
             border-radius: 12px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            width: 350px;
+            width: 320px;
             text-align: center;
         }
-        .login-container h2 {
-            color: #e75480; /* وردي */
+        .form-container h2 {
+            color: #e75480;
             margin-bottom: 20px;
         }
         form {
@@ -42,12 +42,11 @@
             color: #fff;
             border: none;
             border-radius: 8px;
-            font-size: 16px;
+            font-size: 15px;
             cursor: pointer;
-            transition: 0.3s;
         }
         button:hover {
-            background: #c63c65;
+            background: #c7436b;
         }
         p {
             margin-top: 15px;
@@ -58,20 +57,19 @@
             text-decoration: none;
             font-weight: bold;
         }
-        a:hover {
-            text-decoration: underline;
-        }
     </style>
 </head>
 <body>
-    <div class="login-container">
+    <div class="form-container">
         <h2>تسجيل الدخول</h2>
         <form method="post">
             {% csrf_token %}
-            {{ form.as_p }}
+            {{ form.username }}
+            {{ form.password }}
             <button type="submit">دخول</button>
         </form>
-        <p>ليس لديك حساب؟ <a href="{% url 'register' %}">إنشاء حساب جديد</a></p>
+        <p>ليس لديك حساب؟ <a href="{% url 'register' %}">إنشاء حساب</a></p>
     </div>
 </body>
 </html>
+

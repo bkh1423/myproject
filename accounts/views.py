@@ -26,7 +26,7 @@ def login_view(request):
             messages.success(request, f"👋 أهلاً {user.username}")
             return redirect("/")
         else:
-            messages.error(request, "❌ اسم المستخدم أو كلمة المرور غير صحيحة")
+            messages.error(request, "❌ اسم المستخدم أو الرمز غير صحيح")
     else:
         form = SimpleAuthenticationForm()
     return render(request, "accounts/login.html", {"form": form})
@@ -34,5 +34,5 @@ def login_view(request):
 
 def logout_view(request):
     logout(request)
-    messages.info(request, "🚪 تم تسجيل الخروج")
+    messages.info(request, "🚪 تم تسجيل الخروج بنجاح")
     return redirect("/")
