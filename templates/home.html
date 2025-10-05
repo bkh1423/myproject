@@ -11,10 +11,11 @@
 
     <!-- رسائل التنبيهات -->
     {% if messages %}
-    <div class="messages">
+    <div id="messages">
         {% for message in messages %}
             <div class="alert alert-{{ message.tags }}">
                 {{ message }}
+                <span class="close-btn" onclick="this.parentElement.style.display='none';">&times;</span>
             </div>
         {% endfor %}
     </div>
@@ -42,34 +43,63 @@
         }
 
         /* رسائل التنبيه */
-        .messages {
-            margin: 20px auto;
-            width: 80%;
-            text-align: center;
+        #messages {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
         }
+
         .alert {
-            padding: 12px;
-            margin-bottom: 10px;
-            border-radius: 8px;
+            padding: 14px 20px;
+            margin-bottom: 12px;
+            border-radius: 10px;
             font-size: 15px;
             font-weight: bold;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            animation: fadeIn 0.5s ease, fadeOut 0.5s ease 4s forwards;
+            position: relative;
+            min-width: 250px;
         }
+
         .alert-success {
             background: #ffe6ef;
             color: #e75480;
             border: 1px solid #e75480;
         }
+
         .alert-error {
             background: #ffe6e6;
             color: #b8002c;
             border: 1px solid #b8002c;
         }
+
         .alert-info {
             background: #eaf6ff;
             color: #0077b6;
             border: 1px solid #0077b6;
         }
 
+        /* زر الإغلاق */
+        .close-btn {
+            margin-left: 10px;
+            color: #555;
+            font-size: 20px;
+            cursor: pointer;
+            float: right;
+        }
+
+        /* انيميشن */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeOut {
+            to { opacity: 0; transform: translateY(-10px); }
+        }
+
+        /* هيرو */
         .hero {
             height: 90vh;
             background: url("https://images.unsplash.com/photo-1509043759401-136742328bb3") no-repeat center/cover;
