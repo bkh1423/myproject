@@ -14,18 +14,19 @@ def register_view(request):
             user = form.save()
             login(request, user)
 
-            # ✉️ إرسال رسالة إلى البريد المدخل
+            # ✉️ إرسال رسالة ترحيب للإيميل
             subject = "Welcome to Rose Store 🌸"
             message = f"Hello {user.username},\n\nYour account has been created successfully at Rose Store!"
             from_email = settings.DEFAULT_FROM_EMAIL
             recipient_list = [user.email]
 
-            # fail_silently=False يخليك تشوف الغلط لو ما انرسل
-            send_mail(subject, message, from_email, recipient_list, fail_silently=False)
+            send_mail(subject, message, from_email, recipient_list, fail_silently=True)
 
-            # ✅ رسالة نجاح على الموقع
+            # ✅ رسالة نجاح
             messages.success(request, f"🎉 Account created successfully! Welcome {user.username}")
-            return redirect("home")  # 👈 يوديه للهوم
+            return redirect("home")   # 👈 يوديه للهوم
+        else:
+            print("❌ FORM ERRORS:", form.errors)  # يطبع الأخطاء في التيرمنال
     else:
         form = RegisterForm()
     return render(request, "accounts/register.html", {"form": form})
@@ -52,4 +53,3 @@ def logout_view(request):
     logout(request)
     messages.info(request, "🚪 Logged out successfully.")
     return redirect("home")
-

@@ -42,6 +42,13 @@
             border-radius: 8px;
             font-size: 14px;
         }
+        .errorlist {
+            color: red;
+            font-size: 13px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
         button {
             padding: 10px;
             background: #e75480;
@@ -70,17 +77,23 @@
         <h2>Create Account</h2>
         <form method="post">
             {% csrf_token %}
+            
+            {{ form.non_field_errors }}
 
             <label for="id_username">Username</label>
+            {{ form.username.errors }}
             {{ form.username }}
 
             <label for="id_email">Email</label>
+            {{ form.email.errors }}
             {{ form.email }}
 
             <label for="id_password1">Password</label>
+            {{ form.password1.errors }}
             {{ form.password1 }}
 
             <label for="id_password2">Confirm Password</label>
+            {{ form.password2.errors }}
             {{ form.password2 }}
 
             <button type="submit">Register</button>
@@ -89,3 +102,4 @@
     </div>
 </body>
 </html>
+
