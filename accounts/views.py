@@ -1,47 +1,38 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout
 from django.contrib import messages
-from django.core.mail import EmailMultiAlternatives
+from django.core.mail import send_mail
+from django.conf import settings
 from .forms import RegisterForm, LoginForm
 
 
-# ✅ Register View
+# Register
 def register_view(request):
     if request.method == "POST":
         form = RegisterForm(request.POST)
         if form.is_valid():
             user = form.save()
             login(request, user)
-            messages.success(request, "✅ Account created successfully 🎉")
 
-            # Send welcome email
-            if user.email:
-                subject = "🌸 Welcome to Rose Store"
-                text_content = f"Hello {user.username}, welcome to Rose Store!"
-                html_content = f"""
-                <html>
-                    <body style="font-family: Arial; background:#fdf2f8; padding:20px;">
-                        <h2 style="color:#e75480;">🌸 Welcome, {user.username}!</h2>
-                        <p>Thank you for creating an account with <b>Rose Store</b>.</p>
-                        <p>We hope you enjoy shopping with us!</p>
-                        <p style="color:#888;">This is an automated message.</p>
-                    </body>
-                </html>
-                """
-                msg = EmailMultiAlternatives(subject, text_content, None, [user.email])
-                msg.attach_alternative(html_content, "text/html")
-                msg.send()
+            # ✉️ إرسال رسالة تأكيد للإيميل
+            subject = "Welcome to Flower Store 🌸"
+            message = f"Hello {user.username},\n\nYour account has been created successfully at Flower Store!"
+            from_email = settings.DEFAULT_FROM_EMAIL
+            recipient_list = [user.email]
+            send_mail(subject, message, from_email, recipient_list, fail_silently=True)
 
-            return redirect("/")
+            # ✅ رسالة نجاح تظهر على الموقع
+            messages.success(request, "🎉 Account created and logged in successfully!")
+            return redirect("/")  # يوديه للهوم
     else:
         form = RegisterForm()
     return render(request, "accounts/register.html", {"form": form})
 
 
-# ✅ Login View
+# Login
 def login_view(request):
     if request.method == "POST":
-        form = LoginForm(request, data=request.POST)
+        form = LoginForm(data=request.POST)
         if form.is_valid():
             user = form.get_user()
             login(request, user)
@@ -54,9 +45,8 @@ def login_view(request):
     return render(request, "accounts/login.html", {"form": form})
 
 
-# ✅ Logout View
+# Logout
 def logout_view(request):
     logout(request)
-    messages.info(request, "🚪 You have been logged out successfully")
+    messages.info(request, "🚪 Logged out successfully.")
     return redirect("/")
-
