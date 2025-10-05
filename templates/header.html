@@ -16,6 +16,13 @@
                 <li><a class="btn-auth" href="{% url 'register' %}">إنشاء حساب</a></li>
                 <li><a class="btn-auth" href="{% url 'login' %}">تسجيل الدخول</a></li>
             {% endif %}
+
+            <!-- ✅ زر التبديل بين الداكن والفاتح -->
+            <li>
+                <label>
+                    <input type="checkbox" class="switch" id="darkModeSwitch">
+                </label>
+            </li>
         </ul>
     </nav>
 </header>
@@ -40,6 +47,7 @@
         gap: 25px;
         margin: 0;
         padding: 0;
+        align-items: center;
     }
     .nav-links a {
         text-decoration: none;
@@ -60,4 +68,71 @@
         background: #e75480;
         color: #fff;
     }
+
+    /* ✅ switch */
+    .switch {
+      position: relative;
+      height: 1.5rem;
+      width: 3rem;
+      cursor: pointer;
+      appearance: none;
+      -webkit-appearance: none;
+      border-radius: 9999px;
+      background-color: rgba(100, 116, 139, 0.377);
+      transition: all .3s ease;
+    }
+    .switch:checked {
+      background-color: rgba(236, 72, 153, 1);
+    }
+    .switch::before {
+      position: absolute;
+      content: "";
+      left: calc(1.5rem - 1.6rem);
+      top: calc(1.5rem - 1.6rem);
+      display: block;
+      height: 1.6rem;
+      width: 1.6rem;
+      cursor: pointer;
+      border: 1px solid rgba(100, 116, 139, 0.527);
+      border-radius: 9999px;
+      background-color: rgba(255, 255, 255, 1);
+      box-shadow: 0 3px 10px rgba(100, 116, 139, 0.327);
+      transition: all .3s ease;
+    }
+    .switch:hover::before { box-shadow: 0 0 0px 8px rgba(0, 0, 0, .15) }
+    .switch:checked:hover::before { box-shadow: 0 0 0px 8px rgba(236, 72, 153, .15) }
+    .switch:checked:before {
+      transform: translateX(100%);
+      border-color: rgba(236, 72, 153, 1);
+    }
+
+    /* 🌙 الوضع الداكن */
+    body.dark {
+        background: #121212;
+        color: #eee;
+    }
 </style>
+
+<script>
+    // ✅ تبديل بين الوضع الداكن والفاتح
+    document.addEventListener("DOMContentLoaded", function() {
+        const switchBtn = document.getElementById("darkModeSwitch");
+
+        // تحميل الوضع السابق من localStorage
+        if (localStorage.getItem("theme") === "dark") {
+            document.body.classList.add("dark");
+            switchBtn.checked = true;
+        }
+
+        switchBtn.addEventListener("change", function() {
+            if (this.checked) {
+                document.body.classList.add("dark");
+                localStorage.setItem("theme", "dark");
+            } else {
+                document.body.classList.remove("dark");
+                localStorage.setItem("theme", "light");
+            }
+        });
+    });
+</script>
+
