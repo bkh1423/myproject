@@ -13,6 +13,9 @@
                 <li><a href="#">العروض</a></li>
                 <li><a href="#">اتصل بنا</a></li>
                 <li><a href="#">من نحن</a></li>
+                <!-- زرّين الحساب -->
+                <li><a class="btn-auth" href="{% url 'register' %}">إنشاء حساب</a></li>
+                <li><a class="btn-auth" href="{% url 'login' %}">تسجيل الدخول</a></li>
             </ul>
         </nav>
     </header>
@@ -43,6 +46,17 @@
         }
         .nav-links a:hover {
             color: #e75480;
+        }
+        .btn-auth {
+            padding: 6px 12px;
+            border: 1px solid #e75480;
+            border-radius: 6px;
+            color: #e75480;
+            transition: 0.3s;
+        }
+        .btn-auth:hover {
+            background: #e75480;
+            color: #fff;
         }
     </style>
 </body>
