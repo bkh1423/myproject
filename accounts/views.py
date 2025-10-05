@@ -1,32 +1,30 @@
+# accounts/views.py
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout
 from django.contrib import messages
-from .forms import CustomUserCreationForm, CustomAuthenticationForm
+from .forms import NoValidationUserCreationForm, CustomAuthenticationForm
 
-
-# تسجيل مستخدم جديد
 def register_view(request):
     if request.method == "POST":
-        form = CustomUserCreationForm(request.POST)
+        form = NoValidationUserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
             login(request, user)
             messages.success(request, "✅ تم إنشاء الحساب بنجاح 🎉")
-            return redirect("/")  # رجوع للصفحة الرئيسية
+            return redirect("/")
     else:
-        form = CustomUserCreationForm()
+        form = NoValidationUserCreationForm()
     return render(request, "accounts/register.html", {"form": form})
 
 
-# تسجيل دخول
 def login_view(request):
     if request.method == "POST":
         form = CustomAuthenticationForm(data=request.POST)
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            messages.success(request, "👋 أهلاً بك من جديد يا " + user.username)
-            return redirect("/")  # رجوع للصفحة الرئيسية
+            messages.success(request, f"👋 أهلاً بك يا {user.username}")
+            return redirect("/")
         else:
             messages.error(request, "❌ اسم المستخدم أو كلمة المرور غير صحيحة")
     else:
@@ -34,7 +32,6 @@ def login_view(request):
     return render(request, "accounts/login.html", {"form": form})
 
 
-# تسجيل خروج
 def logout_view(request):
     logout(request)
     messages.info(request, "🚪 تم تسجيل الخروج بنجاح")
