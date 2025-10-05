@@ -5,16 +5,11 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-
-    # 👇 الصفحة الرئيسية مرتبطة بتطبيق shop
-    path('', include('shop.urls')),           
-
-    # روابط التطبيقات
+    path('', include('shop.urls')),       # 👈 هنا يفتح home.html
     path('accounts/', include('accounts.urls')),
     path('orders/', include('orders.urls')),
 ]
 
-# 📌 دعم عرض ملفات media أثناء التطوير
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
