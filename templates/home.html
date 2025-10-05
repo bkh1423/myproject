@@ -9,10 +9,21 @@
     <!-- استدعاء الشريط العلوي -->
     {% include "header.html" %}
 
+    <!-- رسائل التنبيهات -->
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
     <main>
         <section class="hero">
             <div class="hero-content">
-                <h1>أهلاً بك في عالم الورود</h1>
+                <h1>أهلاً بك في عالم الورود 🌸</h1>
                 <p>نوصل لك أجمل باقات الورود أينما كنت</p>
                 <a href="#" class="btn">تسوق الآن</a>
             </div>
@@ -29,6 +40,36 @@
             background: #fff;
             color: #333;
         }
+
+        /* رسائل التنبيه */
+        .messages {
+            margin: 20px auto;
+            width: 80%;
+            text-align: center;
+        }
+        .alert {
+            padding: 12px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: bold;
+        }
+        .alert-success {
+            background: #ffe6ef;
+            color: #e75480;
+            border: 1px solid #e75480;
+        }
+        .alert-error {
+            background: #ffe6e6;
+            color: #b8002c;
+            border: 1px solid #b8002c;
+        }
+        .alert-info {
+            background: #eaf6ff;
+            color: #0077b6;
+            border: 1px solid #0077b6;
+        }
+
         .hero {
             height: 90vh;
             background: url("https://images.unsplash.com/photo-1509043759401-136742328bb3") no-repeat center/cover;
