@@ -6,7 +6,7 @@ from .models import CustomUser
 class CustomUserCreationForm(UserCreationForm):
     class Meta:
         model = CustomUser   # هنا نستخدم الموديل المخصص
-        fields = ("username", "email", "phone_number", "address", "password1", "password2")
+        fields = ("username", "email", "phone_number",  "password1")
 
 
 class CustomAuthenticationForm(AuthenticationForm):
