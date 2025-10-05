@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>إنشاء حساب جديد</title>
+</head>
+<body>
+    <h2>إنشاء حساب</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">تسجيل</button>
+    </form>
+    <p>لديك حساب؟ <a href="{% url 'login' %}">تسجيل الدخول</a></p>
+</body>
+</html>
