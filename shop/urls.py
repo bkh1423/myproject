@@ -1,5 +1,7 @@
 from django.urls import path
+from . import views
 
 urlpatterns = [
-    # روابط تطبيق المتجر ستوضع هنا لاحقًا
+    path('', views.home, name='home'),  # 👈 هذا يخلي الرابط / يفتح الصفحة
 ]
+
