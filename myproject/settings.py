@@ -1,4 +1,5 @@
 from pathlib import Path
+import cloudinary
 
 # BASE DIR
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -47,7 +48,7 @@ WSGI_APPLICATION = "myproject.wsgi.application"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR / "templates"],  # global templates folder
+        "DIRS": [BASE_DIR / "templates"],  # مجلد القوالب العام
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -86,7 +87,7 @@ STATIC_URL = "/static/"
 STATICFILES_DIRS = [BASE_DIR / "static"]
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
-# MEDIA FILES (⚡ Cloudinary سيخزن الميديا)
+# MEDIA FILES (⚡ سيتم تخزينها على Cloudinary)
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
@@ -107,7 +108,7 @@ CLOUDINARY_STORAGE = {
     "API_SECRET": "YXusWMP9WuMVtP6RwlVAlrNizDA",
 }
 
-# ✅ Django 5.2+ storage settings
+# ✅ Django 5.2+ STORAGES system
 STORAGES = {
     "default": {
         "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage"
@@ -116,3 +117,11 @@ STORAGES = {
         "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage"
     },
 }
+
+# ⚡ إعداد Cloudinary مباشرة (مهم لتفادي Must supply cloud_name)
+cloudinary.config( 
+    cloud_name = "dzulhzpmd", 
+    api_key = "768324173714479", 
+    api_secret = "YXusWMP9WuMVtP6RwlVAlrNizDA", 
+    secure = True
+)
