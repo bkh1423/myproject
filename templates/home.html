@@ -6,32 +6,18 @@
 </head>
 <body>
 
-    <!-- ✅ استدعاء الشريط العلوي -->
     {% include "header.html" %}
-
-    <!-- ✅ رسائل التنبيهات -->
-    {% if messages %}
-    <div id="messages">
-        {% for message in messages %}
-            <div class="alert alert-{{ message.tags }}">
-                {{ message }}
-                <span class="close-btn" onclick="this.parentElement.style.display='none';">&times;</span>
-            </div>
-        {% endfor %}
-    </div>
-    {% endif %}
 
     <main>
         <section class="hero">
             <div class="hero-content">
-                <h1>Welcome to Rose Store 🌸</h1>
+                <h1 class="blur-text">Welcome to Rose Store 🌸</h1>
                 <p>We deliver the most beautiful flower bouquets, anywhere you are.</p>
                 <a href="{% url 'product_list' %}" class="btn">Shop Now</a>
             </div>
         </section>
     </main>
 
-    <!-- ✅ استدعاء الشريط السفلي -->
     {% include "footer.html" %}
 
     <style>
@@ -40,99 +26,27 @@
             font-family: 'Tahoma', sans-serif;
             background: linear-gradient(135deg, #fff0f6, #ffe6ef, #fdf2f8);
             color: #333;
-            transition: background .3s ease, color .3s ease;
         }
 
-        /* ✅ Dark Mode */
-        body.dark {
-            background: linear-gradient(135deg, #1a1a1a, #222, #111);
-            color: #eee;
-        }
-        body.dark .hero {
-            background: #1e1e1e;
-        }
-        body.dark .btn {
-            background: #444;
-            color: #fff;
-        }
-        body.dark .btn:hover {
-            background: #666;
-        }
-        body.dark .alert-success {
-            background: #1a472a;
-            border-color: #28a745;
-            color: #c6ffc6;
-        }
-        body.dark .alert-error {
-            background: #3b0d0d;
-            border-color: #ff4d4d;
-            color: #ffb3b3;
-        }
-        body.dark .alert-info {
-            background: #0d2c40;
-            border-color: #17a2b8;
-            color: #a3e7ff;
-        }
-
-        /* ✅ Messages */
-        #messages {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 9999;
-        }
-        .alert {
-            padding: 14px 20px;
-            margin-bottom: 12px;
-            border-radius: 10px;
-            font-size: 15px;
-            font-weight: bold;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            position: relative;
-            min-width: 250px;
-            animation: fadeIn 0.5s ease, fadeOut 0.5s ease 6s forwards;
-        }
-        .alert-success {
-            background: #ffe6ef;
-            color: #e75480;
-            border: 1px solid #e75480;
-        }
-        .alert-error {
-            background: #ffe6e6;
-            color: #b8002c;
-            border: 1px solid #b8002c;
-        }
-        .alert-info {
-            background: #eaf6ff;
-            color: #0077b6;
-            border: 1px solid #0077b6;
-        }
-        .close-btn {
-            position: absolute;
-            right: 10px;
-            top: 5px;
-            cursor: pointer;
-            font-size: 18px;
-            color: #555;
-        }
-
-        /* Hero */
         .hero {
             height: 90vh;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            position: relative;
-            color: #444;
-        }
-        .hero-content {
-            animation: fadeInUp 1.5s ease;
         }
         .hero h1 {
             font-size: 52px;
             margin-bottom: 15px;
             color: #e75480;
+        }
+        .blur-text {
+            animation: blurAnim 4s infinite alternate;
+        }
+        @keyframes blurAnim {
+            0% { filter: blur(0px); }
+            50% { filter: blur(3px); }
+            100% { filter: blur(0px); }
         }
         .hero p {
             font-size: 20px;
@@ -152,22 +66,6 @@
             background: #c7436b;
             transform: scale(1.1);
         }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes fadeOut {
-            to { opacity: 0; transform: translateY(-10px); }
-        }
     </style>
 </body>
 </html>
-
-
-
