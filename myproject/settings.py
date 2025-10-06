@@ -10,6 +10,7 @@ ALLOWED_HOSTS = []
 
 # INSTALLED APPS
 INSTALLED_APPS = [
+    # Django default apps
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -46,7 +47,7 @@ WSGI_APPLICATION = "myproject.wsgi.application"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR / "templates"],
+        "DIRS": [BASE_DIR / "templates"],  # مجلد القوالب
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -85,7 +86,7 @@ STATIC_URL = "/static/"
 STATICFILES_DIRS = [BASE_DIR / "static"]
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
-# MEDIA FILES (will be stored in Cloudinary)
+# MEDIA FILES (Cloudinary)
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
@@ -99,7 +100,7 @@ AUTH_USER_MODEL = "accounts.CustomUser"
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 DEFAULT_FROM_EMAIL = "noreply@flowerstore.com"
 
-# Cloudinary configuration
+# 🌩 Cloudinary configuration
 CLOUDINARY_STORAGE = {
     "CLOUD_NAME": "dzulhzpmd",
     "API_KEY": "768324173714479",
