@@ -10,7 +10,6 @@ ALLOWED_HOSTS = []
 
 # INSTALLED APPS
 INSTALLED_APPS = [
-    # Django default apps
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -86,7 +85,7 @@ STATIC_URL = "/static/"
 STATICFILES_DIRS = [BASE_DIR / "static"]
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
-# MEDIA FILES
+# MEDIA FILES (will be stored in Cloudinary)
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
@@ -96,7 +95,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # Custom User
 AUTH_USER_MODEL = "accounts.CustomUser"
 
-# Email (development: prints emails in console)
+# Email Settings (console for development)
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 DEFAULT_FROM_EMAIL = "noreply@flowerstore.com"
 
