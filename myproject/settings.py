@@ -47,7 +47,7 @@ WSGI_APPLICATION = "myproject.wsgi.application"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR / "templates"],  # global templates folder
+        "DIRS": [BASE_DIR / "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -86,36 +86,24 @@ STATIC_URL = "/static/"
 STATICFILES_DIRS = [BASE_DIR / "static"]
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
-# MEDIA FILES (⚠️ Cloudinary will override these)
+# MEDIA FILES
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
 # DEFAULT PK FIELD
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-# ⚠️ Custom User
+# Custom User
 AUTH_USER_MODEL = "accounts.CustomUser"
 
-# 📩 Email Settings (Console for development)
+# Email (development: prints emails in console)
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 DEFAULT_FROM_EMAIL = "noreply@flowerstore.com"
 
-"""
-⚡ إذا حابب ترسل فعليًا عبر Gmail، غيّر الجزء فوق إلى:
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = "smtp.gmail.com"
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = "yourgmail@gmail.com"
-EMAIL_HOST_PASSWORD = "your-app-password"  # مش الباسوورد العادي، لازم App Password
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
-"""
-
-# 🌩 Cloudinary configuration
+# Cloudinary configuration
 CLOUDINARY_STORAGE = {
     "CLOUD_NAME": "dzulhzpmd",
     "API_KEY": "768324173714479",
     "API_SECRET": "YXusWMP9WuMVtP6RwlVAlrNizDA",
 }
-
 DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
