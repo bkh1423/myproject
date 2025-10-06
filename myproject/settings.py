@@ -22,6 +22,10 @@ INSTALLED_APPS = [
     "accounts",
     "shop",
     "orders",
+
+    # Cloudinary apps
+    "cloudinary",
+    "cloudinary_storage",
 ]
 
 # MIDDLEWARE
@@ -82,7 +86,7 @@ STATIC_URL = "/static/"
 STATICFILES_DIRS = [BASE_DIR / "static"]
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
-# MEDIA FILES
+# MEDIA FILES (⚠️ Cloudinary will override these)
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
@@ -92,8 +96,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # ⚠️ Custom User
 AUTH_USER_MODEL = "accounts.CustomUser"
 
-# 📩 Email Settings
-# During development → emails will print in the console
+# 📩 Email Settings (Console for development)
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 DEFAULT_FROM_EMAIL = "noreply@flowerstore.com"
 
@@ -107,3 +110,12 @@ EMAIL_HOST_USER = "yourgmail@gmail.com"
 EMAIL_HOST_PASSWORD = "your-app-password"  # مش الباسوورد العادي، لازم App Password
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 """
+
+# 🌩 Cloudinary configuration
+CLOUDINARY_STORAGE = {
+    "CLOUD_NAME": "dzulhzpmd",
+    "API_KEY": "768324173714479",
+    "API_SECRET": "YXusWMP9WuMVtP6RwlVAlrNizDA",
+}
+
+DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
