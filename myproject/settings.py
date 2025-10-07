@@ -22,12 +22,12 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 
-    # Apps الخاصة بك
+    # 🧱 تطبيقات المشروع
     "accounts",
     "shop",
     "orders",
 
-    # Cloudinary
+    # ☁️ Cloudinary
     "cloudinary",
     "cloudinary_storage",
 ]
@@ -62,15 +62,15 @@ TEMPLATES = [
     },
 ]
 
-# 🗄️ إعدادات قواعد البيانات
+# 🗄️ إعداد قواعد البيانات
 DATABASES = {
-    # 💻 قاعدة بيانات التطوير (محلية)
+    # 💻 قاعدة التطوير (محلية)
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": BASE_DIR / "db.sqlite3",
     },
 
-    # ☁️ قاعدة بيانات الإنتاج (PostgreSQL)
+    # ☁️ قاعدة الإنتاج (PostgreSQL)
     "production": {
         "ENGINE": "django.db.backends.postgresql",
         "HOST": os.getenv("PROD_DB_HOST"),
@@ -81,11 +81,12 @@ DATABASES = {
     },
 }
 
-# ✅ ملاحظة مهمة:
-# أثناء العمل المحلي، نستخدم SQLite (افتراضي)
-# وعند الرفع على Render (بيئة الإنتاج)، يتحول تلقائيًا إلى PostgreSQL
+# ✅ تبديل تلقائي بين البيئتين
 if not DEBUG:
     DATABASES["default"] = DATABASES["production"]
+    print("🌐 Using PRODUCTION database")
+else:
+    print("💻 Using LOCAL database (SQLite)")
 
 # 🔑 التحقق من كلمات المرور
 AUTH_PASSWORD_VALIDATORS = [
