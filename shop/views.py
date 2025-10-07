@@ -49,4 +49,4 @@ def remove_from_cart(request, product_id):
         del cart[str(product_id)]
         request.session["cart"] = cart
         messages.info(request, "🗑️ Item removed from cart.")
-    return redirect("cart")
+    return redirect("cart_view")
