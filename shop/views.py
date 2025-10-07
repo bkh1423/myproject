@@ -14,7 +14,7 @@ def product_list(request):
     return render(request, 'shop/product_list.html', {'products': products})
 
 
-# ➕ إضافة المنتج إلى السلة
+# ➕ إضافة المنتج إلى السلة ثم الانتقال مباشرة إلى السلة
 def add_to_cart(request, product_id):
     product = get_object_or_404(Product, id=product_id)
     cart = request.session.get("cart", {})
@@ -32,7 +32,7 @@ def add_to_cart(request, product_id):
 
     request.session["cart"] = cart
     messages.success(request, f"✅ {product.name} added to your cart.")
-    return redirect("product_list")
+    return redirect("cart_view")  # ✅ ينتقل مباشرة إلى صفحة السلة
 
 
 # 🧾 عرض السلة
