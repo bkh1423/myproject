@@ -1,8 +1,21 @@
 <header>
+
+    <!-- ✅ Flash Messages -->
+    {% if messages %}
+    <div id="messages">
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+                <span class="close-btn" onclick="this.parentElement.style.display='none';">&times;</span>
+            </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
     <nav class="navbar">
         <div class="logo">🌸 Rose Store</div>
         <ul class="nav-links">
-            <li><a href="/">Home</a></li>
+            <li><a href="{% url 'home' %}">Home</a></li>
             <li><a href="{% url 'product_list' %}">Products</a></li>
             <li><a href="#">About Us</a></li>
             <li><a href="#">Cart 🛒</a></li>
@@ -25,6 +38,57 @@
 </header>
 
 <style>
+    /* ✅ Flash Messages */
+    #messages {
+        position: fixed;
+        top: 15px;
+        right: 20px;
+        z-index: 9999;
+    }
+    .alert {
+        padding: 14px 20px;
+        margin-bottom: 10px;
+        border-radius: 10px;
+        font-size: 15px;
+        font-weight: bold;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        position: relative;
+        min-width: 280px;
+        animation: fadeIn 0.5s ease, fadeOut 0.5s ease 6s forwards;
+        backdrop-filter: blur(8px);
+    }
+    .alert-success {
+        background: rgba(255, 230, 239, 0.8);
+        color: #e75480;
+        border: 1px solid #e75480;
+    }
+    .alert-error {
+        background: rgba(255, 230, 230, 0.8);
+        color: #b8002c;
+        border: 1px solid #b8002c;
+    }
+    .alert-info {
+        background: rgba(234, 246, 255, 0.8);
+        color: #0077b6;
+        border: 1px solid #0077b6;
+    }
+    .close-btn {
+        position: absolute;
+        right: 10px;
+        top: 5px;
+        cursor: pointer;
+        font-size: 18px;
+        color: #555;
+    }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeOut {
+        to { opacity: 0; transform: translateY(-10px); }
+    }
+
+    /* ✅ Navbar Styling */
     .navbar {
         display: flex;
         justify-content: space-between;
@@ -61,7 +125,7 @@
         color: #e75480;
     }
 
-    /* ✅ Auth buttons */
+    /* ✅ Auth Buttons */
     .btn-auth {
         padding: 6px 12px;
         border: 1px solid #e75480;
@@ -76,7 +140,7 @@
         color: #fff;
     }
 
-    /* 🌙 Dark mode switch */
+    /* 🌙 Dark Mode Switch */
     .switch {
         position: relative;
         height: 1.5rem;
@@ -121,7 +185,7 @@
         border-color: rgba(236, 72, 153, 1);
     }
 
-    /* 🌙 Dark mode styling */
+    /* 🌙 Dark Mode Styling */
     body.dark .navbar {
         background: #1e1e1e;
         box-shadow: 0 2px 5px rgba(255,255,255,0.1);
@@ -171,4 +235,3 @@
         });
     });
 </script>
-

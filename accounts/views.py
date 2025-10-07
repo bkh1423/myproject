@@ -14,19 +14,18 @@ def register_view(request):
             user = form.save()
             login(request, user)
 
-            # ✉️ Welcome email
+            # ✉️ إرسال رسالة ترحيب
             subject = "Welcome to Rose Store 🌸"
             message = f"Hello {user.username},\n\nYour account has been created successfully at Rose Store!"
             from_email = settings.DEFAULT_FROM_EMAIL
             recipient_list = [user.email]
             send_mail(subject, message, from_email, recipient_list, fail_silently=True)
 
-            # 🎉 Success message
+            # ✅ رسالة نجاح
             messages.success(request, f"🎉 Account created successfully! Welcome, {user.username}!")
-            return redirect("home")  # ✅ redirect to homepage
+            return redirect("home")  # بعد التسجيل يرجعه للصفحة الرئيسية
         else:
-            messages.error(request, "❌ Please fix the errors below and try again.")
-            print("❌ FORM ERRORS:", form.errors)
+            messages.error(request, "❌ Please correct the errors below and try again.")
     else:
         form = RegisterForm()
     return render(request, "accounts/register.html", {"form": form})
@@ -40,7 +39,7 @@ def login_view(request):
             user = form.get_user()
             login(request, user)
             messages.success(request, f"👋 Welcome back, {user.username}!")
-            return redirect("product_list")  # 👈 الأفضل يروح للمنتجات بعد الدخول
+            return redirect("home")  # بعد الدخول يرجعه للصفحة الرئيسية
         else:
             messages.error(request, "❌ Invalid username or password.")
     else:
@@ -52,5 +51,5 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     messages.info(request, "🚪 You have logged out successfully.")
-    return redirect("home")
+    return redirect("home")  # بعد الخروج يرجعه للصفحة الرئيسية
 
