@@ -84,9 +84,9 @@ DATABASES = {
 # ✅ تبديل تلقائي بين البيئتين
 if not DEBUG:
     DATABASES["default"] = DATABASES["production"]
-    print("🌐 Using PRODUCTION database")
+    print(" Using PRODUCTION database")
 else:
-    print("💻 Using LOCAL database (SQLite)")
+    print(" Using LOCAL database (SQLite)")
 
 # 🔑 التحقق من كلمات المرور
 AUTH_PASSWORD_VALIDATORS = [
@@ -138,3 +138,4 @@ cloudinary.config(
     api_secret=os.getenv("CLOUD_API_SECRET"),
     secure=True,
 )
+
