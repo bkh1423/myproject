@@ -1,0 +1,27 @@
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Virtual environment
+venv/
+
+# Local database
+db.sqlite3
+
+# Environment variables
+.env
+
+# VSCode settings
+.vscode/
+
+# Static & media (collected)
+staticfiles/
+media/
+
+# Ignore compiled files
+*.log
+*.pot
+*.pyc
+*.pyo
+*.pyd
+*.sqlite3-journal
