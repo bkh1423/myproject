@@ -1,45 +1,35 @@
 <footer>
     <div class="footer-container">
-        <div class="footer-about">
-            <h3>🌸 متجر الورود</h3>
-            <p>أفضل متجر لتوصيل الورود والهدايا بأناقة وذوق.</p>
-        </div>
         <div class="footer-links">
-            <h4>روابط سريعة</h4>
+            <h4>Quick Links</h4>
             <ul>
-                <li><a href="#">الرئيسية</a></li>
-                <li><a href="#">المنتجات</a></li>
-                <li><a href="#">العروض</a></li>
+                <li><a href="/">Home</a></li>
+                <li><a href="{% url 'product_list' %}">Products</a></li>
             </ul>
-        </div>
-        <div class="footer-contact">
-            <h4>تواصل معنا</h4>
-            <p>📍 الرياض، السعودية</p>
-            <p>📞 0500000000</p>
         </div>
     </div>
     <div class="footer-bottom">
-        <p>© 2025 جميع الحقوق محفوظة لمتجر الورود 🌸</p>
+        <p>© 2025 All Rights Reserved - Rose Store 🌸</p>
     </div>
 
     <style>
         footer {
             background: #fff0f5;
-            padding: 30px 50px;
+            padding: 20px 40px;
             margin-top: 50px;
         }
         .footer-container {
             display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 30px;
+            justify-content: center;
         }
-        .footer-container h3, .footer-container h4 {
+        .footer-links h4 {
             color: #e75480;
+            margin-bottom: 10px;
         }
         .footer-links ul {
             list-style: none;
             padding: 0;
+            text-align: center;
         }
         .footer-links a {
             text-decoration: none;
@@ -50,7 +40,7 @@
         }
         .footer-bottom {
             text-align: center;
-            margin-top: 20px;
+            margin-top: 15px;
             color: #777;
             border-top: 1px solid #ddd;
             padding-top: 10px;

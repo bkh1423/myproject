@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>تسجيل الدخول - متجر الورود 🌸</title>
+    <title>Login - Rose Store 🌸</title>
     <style>
         body {
-            font-family: "Tajawal", sans-serif;
+            font-family: "Tahoma", sans-serif;
             background: #fff0f5;
             margin: 0;
             display: flex;
@@ -61,15 +61,14 @@
 </head>
 <body>
     <div class="form-container">
-        <h2>تسجيل الدخول</h2>
+        <h2>Login</h2>
         <form method="post">
             {% csrf_token %}
             {{ form.username }}
             {{ form.password }}
-            <button type="submit">دخول</button>
+            <button type="submit">Login</button>
         </form>
-        <p>ليس لديك حساب؟ <a href="{% url 'register' %}">إنشاء حساب</a></p>
+        <p>Don't have an account? <a href="{% url 'register' %}">Register</a></p>
     </div>
 </body>
 </html>
-

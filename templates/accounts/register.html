@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Register - Flower Store 🌸</title>
+    <title>Register - Rose Store 🌸</title>
     <style>
         body {
             font-family: "Tahoma", sans-serif;
@@ -77,7 +77,6 @@
         <h2>Create Account</h2>
         <form method="post">
             {% csrf_token %}
-            
             {{ form.non_field_errors }}
 
             <label for="id_username">Username</label>
@@ -102,4 +101,3 @@
     </div>
 </body>
 </html>
-

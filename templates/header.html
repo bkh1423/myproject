@@ -1,23 +1,20 @@
 <header>
     <nav class="navbar">
-        <div class="logo">🌸 متجر الورود</div>
+        <div class="logo">🌸 Rose Store</div>
         <ul class="nav-links">
-            <li><a href="/">الرئيسية</a></li>
-            <li><a href="{% url 'product_list' %}">المنتجات</a></li>
-            <li><a href="#">العروض</a></li>
-            <li><a href="#">اتصل بنا</a></li>
-            <li><a href="#">من نحن</a></li>
+            <li><a href="/">Home</a></li>
+            <li><a href="{% url 'product_list' %}">Products</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Cart 🛒</a></li>
 
-            <!-- منطق الحساب -->
             {% if user.is_authenticated %}
-                <li><a class="btn-auth" href="{% url 'logout' %}">تسجيل خروج</a></li>
-                <li><a class="btn-auth" href="#">حسابي</a></li>
+                <li><a class="btn-auth" href="{% url 'logout' %}">Logout</a></li>
             {% else %}
-                <li><a class="btn-auth" href="{% url 'register' %}">إنشاء حساب</a></li>
-                <li><a class="btn-auth" href="{% url 'login' %}">تسجيل الدخول</a></li>
+                <li><a class="btn-auth" href="{% url 'login' %}">Login</a></li>
+                <li><a class="btn-auth" href="{% url 'register' %}">Register</a></li>
             {% endif %}
 
-            <!-- ✅ زر التبديل بين الداكن والفاتح -->
+            <!-- 🌙 Dark mode toggle -->
             <li>
                 <label>
                     <input type="checkbox" class="switch" id="darkModeSwitch">
@@ -35,95 +32,118 @@
         background: white;
         padding: 15px 40px;
         box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        transition: background 0.3s ease;
     }
+
     .logo {
-        font-size: 20px;
+        font-size: 22px;
         font-weight: bold;
         color: #e75480;
     }
+
     .nav-links {
         list-style: none;
         display: flex;
-        gap: 25px;
+        gap: 22px;
         margin: 0;
         padding: 0;
         align-items: center;
     }
+
     .nav-links a {
         text-decoration: none;
         color: #444;
         font-weight: 500;
+        transition: color 0.3s ease;
     }
+
     .nav-links a:hover {
         color: #e75480;
     }
+
+    /* ✅ Auth buttons */
     .btn-auth {
         padding: 6px 12px;
         border: 1px solid #e75480;
         border-radius: 6px;
         color: #e75480;
         transition: 0.3s;
+        font-weight: 500;
     }
+
     .btn-auth:hover {
         background: #e75480;
         color: #fff;
     }
 
-    /* ✅ switch */
+    /* 🌙 Dark mode switch */
     .switch {
-      position: relative;
-      height: 1.5rem;
-      width: 3rem;
-      cursor: pointer;
-      appearance: none;
-      -webkit-appearance: none;
-      border-radius: 9999px;
-      background-color: rgba(100, 116, 139, 0.377);
-      transition: all .3s ease;
-    }
-    .switch:checked {
-      background-color: rgba(236, 72, 153, 1);
-    }
-    .switch::before {
-      position: absolute;
-      content: "";
-      left: calc(1.5rem - 1.6rem);
-      top: calc(1.5rem - 1.6rem);
-      display: block;
-      height: 1.6rem;
-      width: 1.6rem;
-      cursor: pointer;
-      border: 1px solid rgba(100, 116, 139, 0.527);
-      border-radius: 9999px;
-      background-color: rgba(255, 255, 255, 1);
-      box-shadow: 0 3px 10px rgba(100, 116, 139, 0.327);
-      transition: all .3s ease;
-    }
-    .switch:hover::before { box-shadow: 0 0 0px 8px rgba(0, 0, 0, .15) }
-    .switch:checked:hover::before { box-shadow: 0 0 0px 8px rgba(236, 72, 153, .15) }
-    .switch:checked:before {
-      transform: translateX(100%);
-      border-color: rgba(236, 72, 153, 1);
+        position: relative;
+        height: 1.5rem;
+        width: 3rem;
+        cursor: pointer;
+        appearance: none;
+        -webkit-appearance: none;
+        border-radius: 9999px;
+        background-color: rgba(100, 116, 139, 0.377);
+        transition: all 0.3s ease;
     }
 
-    /* 🌙 الوضع الداكن للهيدر */
+    .switch:checked {
+        background-color: rgba(236, 72, 153, 1);
+    }
+
+    .switch::before {
+        position: absolute;
+        content: "";
+        left: calc(1.5rem - 1.6rem);
+        top: calc(1.5rem - 1.6rem);
+        display: block;
+        height: 1.6rem;
+        width: 1.6rem;
+        border: 1px solid rgba(100, 116, 139, 0.527);
+        border-radius: 9999px;
+        background-color: white;
+        box-shadow: 0 3px 10px rgba(100, 116, 139, 0.327);
+        transition: all 0.3s ease;
+    }
+
+    .switch:hover::before {
+        box-shadow: 0 0 0px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    .switch:checked:hover::before {
+        box-shadow: 0 0 0px 8px rgba(236, 72, 153, 0.15);
+    }
+
+    .switch:checked:before {
+        transform: translateX(100%);
+        border-color: rgba(236, 72, 153, 1);
+    }
+
+    /* 🌙 Dark mode styling */
     body.dark .navbar {
         background: #1e1e1e;
         box-shadow: 0 2px 5px rgba(255,255,255,0.1);
     }
+
     body.dark .nav-links a {
         color: #ddd;
     }
+
     body.dark .nav-links a:hover {
         color: #ff99bb;
     }
+
     body.dark .logo {
         color: #ff99bb;
     }
+
     body.dark .btn-auth {
         border-color: #ff99bb;
         color: #ff99bb;
     }
+
     body.dark .btn-auth:hover {
         background: #ff99bb;
         color: #fff;
@@ -131,11 +151,10 @@
 </style>
 
 <script>
-    // ✅ تبديل بين الوضع الداكن والفاتح مع التخزين
+    // ✅ Dark/Light theme toggle with localStorage
     document.addEventListener("DOMContentLoaded", function() {
         const switchBtn = document.getElementById("darkModeSwitch");
 
-        // تحميل الوضع السابق من localStorage
         if (localStorage.getItem("theme") === "dark") {
             document.body.classList.add("dark");
             switchBtn.checked = true;
@@ -152,5 +171,4 @@
         });
     });
 </script>
-
 
