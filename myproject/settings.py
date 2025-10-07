@@ -3,7 +3,7 @@ import os
 import cloudinary
 from dotenv import load_dotenv
 
-# 🧰 تحميل متغيرات البيئة من ملف .env
+# ✅ تحميل متغيرات البيئة من ملف .env
 load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,9 +21,13 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+
+    # Apps الخاصة بك
     "accounts",
     "shop",
     "orders",
+
+    # Cloudinary
     "cloudinary",
     "cloudinary_storage",
 ]
@@ -58,29 +62,32 @@ TEMPLATES = [
     },
 ]
 
-# 🗄️ قواعد البيانات
-if DEBUG:
-    # 💻 قاعدة بيانات التطوير
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.sqlite3",
-            "NAME": BASE_DIR / "db.sqlite3",
-        }
-    }
-else:
-    # 🌐 قاعدة بيانات الإنتاج (PostgreSQL)
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.postgresql",
-            "HOST": os.getenv("PROD_DB_HOST"),
-            "PORT": os.getenv("PROD_DB_PORT"),
-            "NAME": os.getenv("PROD_DB_NAME"),
-            "USER": os.getenv("PROD_DB_USER"),
-            "PASSWORD": os.getenv("PROD_DB_PASSWORD"),
-        }
-    }
+# 🗄️ إعدادات قواعد البيانات
+DATABASES = {
+    # 💻 قاعدة بيانات التطوير (محلية)
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
+    },
 
-# 🔑 تحقق كلمات المرور
+    # ☁️ قاعدة بيانات الإنتاج (PostgreSQL)
+    "production": {
+        "ENGINE": "django.db.backends.postgresql",
+        "HOST": os.getenv("PROD_DB_HOST"),
+        "PORT": os.getenv("PROD_DB_PORT"),
+        "NAME": os.getenv("PROD_DB_NAME"),
+        "USER": os.getenv("PROD_DB_USER"),
+        "PASSWORD": os.getenv("PROD_DB_PASSWORD"),
+    },
+}
+
+# ✅ ملاحظة مهمة:
+# أثناء العمل المحلي، نستخدم SQLite (افتراضي)
+# وعند الرفع على Render (بيئة الإنتاج)، يتحول تلقائيًا إلى PostgreSQL
+if not DEBUG:
+    DATABASES["default"] = DATABASES["production"]
+
+# 🔑 التحقق من كلمات المرور
 AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
     {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
@@ -88,7 +95,7 @@ AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
 ]
 
-# 🌍 اللغة والمنطقة
+# 🌍 الإعدادات العامة
 LANGUAGE_CODE = "en-us"
 TIME_ZONE = "UTC"
 USE_I18N = True
@@ -96,7 +103,7 @@ USE_TZ = True
 
 # 🧾 الملفات الثابتة والإعلامية
 STATIC_URL = "/static/"
-STATICFILES_DIRS = [BASE_DIR / "static"] if (BASE_DIR / "static").exists() else []
+STATICFILES_DIRS = [BASE_DIR / "static"]
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
 MEDIA_URL = "/media/"
@@ -104,14 +111,14 @@ MEDIA_ROOT = BASE_DIR / "media"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-# 👤 المستخدم المخصص
+# 👤 نموذج المستخدم المخصص
 AUTH_USER_MODEL = "accounts.CustomUser"
 
-# 📧 البريد
+# 📧 البريد الإلكتروني
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 DEFAULT_FROM_EMAIL = "noreply@flowerstore.com"
 
-# ☁️ Cloudinary إعدادات
+# ☁️ Cloudinary
 CLOUDINARY_STORAGE = {
     "CLOUD_NAME": os.getenv("CLOUD_NAME"),
     "API_KEY": os.getenv("CLOUD_API_KEY"),
@@ -123,6 +130,7 @@ STORAGES = {
     "staticfiles": {"BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage"},
 }
 
+# ☁️ إعداد Cloudinary
 cloudinary.config(
     cloud_name=os.getenv("CLOUD_NAME"),
     api_key=os.getenv("CLOUD_API_KEY"),
