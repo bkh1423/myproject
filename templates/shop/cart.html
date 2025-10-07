@@ -1,0 +1,162 @@
+{% extends "base.html" %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Cart - Rose Store 🌸</title>
+    <style>
+        body {
+            font-family: "Tajawal", sans-serif;
+            background: #fff0f5;
+            margin: 0;
+            padding: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #e75480;
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 90%;
+            margin: 0 auto;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #e75480;
+            color: white;
+            font-size: 16px;
+        }
+
+        td {
+            border-bottom: 1px solid #eee;
+            font-size: 15px;
+        }
+
+        img {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        .remove-btn {
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .remove-btn:hover {
+            background-color: #cc0000;
+        }
+
+        .cart-total {
+            text-align: right;
+            width: 90%;
+            margin: 25px auto;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .actions {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .btn {
+            background-color: #e75480;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 15px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #c13c68;
+        }
+
+        .empty-cart {
+            text-align: center;
+            color: #666;
+            font-size: 18px;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>🛒 Your Shopping Cart</h1>
+
+    {% if cart %}
+        <table>
+            <tr>
+                <th>Image</th>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Subtotal</th>
+                <th>Action</th>
+            </tr>
+            {% for key, item in cart.items %}
+            <tr>
+                <td>
+                    {% if item.image %}
+                        <img src="{{ item.image }}" alt="{{ item.name }}">
+                    {% else %}
+                        <span>No image</span>
+                    {% endif %}
+                </td>
+                <td>{{ item.name }}</td>
+                <td>${{ item.price }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>${{ item.price|floatformat:2|add:""|floatformat:2|add:item.quantity|floatformat:2 }}</td>
+                <td>
+                    <form action="{% url 'remove_from_cart' key %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="remove-btn">Remove</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <div class="cart-total">
+            Total: ${{ total|floatformat:2 }}
+        </div>
+
+        <div class="actions">
+            <a href="{% url 'product_list' %}" class="btn">Continue Shopping 🌸</a>
+        </div>
+
+    {% else %}
+        <div class="empty-cart">
+            <p>Your cart is empty 😢</p>
+            <a href="{% url 'product_list' %}" class="btn">Shop Now 🌸</a>
+        </div>
+    {% endif %}
+
+</body>
+</html>
+{% endblock %}
