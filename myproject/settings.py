@@ -3,17 +3,17 @@ import os
 import cloudinary
 from dotenv import load_dotenv
 
-# ✅ تحميل متغيرات البيئة من ملف .env
+
 load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# 🔐 الأمان
+
 SECRET_KEY = os.getenv("SECRET_KEY", "django-insecure-dev-fallback")
 DEBUG = os.getenv("DEBUG", "True") == "True"
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "127.0.0.1,localhost").split(",")
 
-# 📦 التطبيقات
+
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -138,4 +138,5 @@ cloudinary.config(
     api_secret=os.getenv("CLOUD_API_SECRET"),
     secure=True,
 )
+
 
