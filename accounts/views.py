@@ -14,16 +14,16 @@ def register_view(request):
             user = form.save()
             login(request, user)
 
-            # ✉️ إرسال رسالة ترحيب
+            # ✉️ إرسال رسالة ترحيب عند إنشاء الحساب
             subject = "Welcome to Rose Store 🌸"
             message = f"Hello {user.username},\n\nYour account has been created successfully at Rose Store!"
             from_email = settings.DEFAULT_FROM_EMAIL
             recipient_list = [user.email]
             send_mail(subject, message, from_email, recipient_list, fail_silently=True)
 
-            # ✅ رسالة نجاح
+            # ✅ رسالة نجاح للمستخدم
             messages.success(request, f"🎉 Account created successfully! Welcome, {user.username}!")
-            return redirect("home")  # بعد التسجيل يرجعه للصفحة الرئيسية
+            return redirect("home")
         else:
             messages.error(request, "❌ Please correct the errors below and try again.")
     else:
@@ -38,8 +38,17 @@ def login_view(request):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
+
+            # ✉️ إرسال رسالة عند تسجيل الدخول
+            subject = "تم تسجيل الدخول إلى Rose Store 🌼"
+            message = f"Hello {user.username},\n\nYou have successfully logged in to your Rose Store account."
+            from_email = settings.DEFAULT_FROM_EMAIL
+            recipient_list = [user.email]
+            send_mail(subject, message, from_email, recipient_list, fail_silently=True)
+
+            # ✅ رسالة نجاح داخل الموقع
             messages.success(request, f"👋 Welcome back, {user.username}!")
-            return redirect("home")  # بعد الدخول يرجعه للصفحة الرئيسية
+            return redirect("home")
         else:
             messages.error(request, "❌ Invalid username or password.")
     else:
@@ -51,5 +60,4 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     messages.info(request, "🚪 You have logged out successfully.")
-    return redirect("home")  # بعد الخروج يرجعه للصفحة الرئيسية
-
+    return redirect("home")
