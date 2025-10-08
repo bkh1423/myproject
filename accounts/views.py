@@ -1,12 +1,12 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout
 from django.contrib import messages
-from django.core.mail import send_mail
+from django.core.mail import EmailMessage
 from django.conf import settings
 from .forms import RegisterForm, LoginForm
 
 
-# ✅ Register View
+# ✅ Register View (تسجيل مستخدم جديد)
 def register_view(request):
     if request.method == "POST":
         form = RegisterForm(request.POST)
@@ -14,14 +14,27 @@ def register_view(request):
             user = form.save()
             login(request, user)
 
-            # ✉️ إرسال رسالة ترحيب عند إنشاء الحساب
+            # ✉️ إرسال رسالة ترحيب حقيقية عبر Gmail
             subject = "Welcome to Rose Store 🌸"
-            message = f"Hello {user.username},\n\nYour account has been created successfully at Rose Store!"
-            from_email = settings.DEFAULT_FROM_EMAIL
-            recipient_list = [user.email]
-            send_mail(subject, message, from_email, recipient_list, fail_silently=True)
+            message = f"""
+            Hello {user.username},
 
-            # ✅ رسالة نجاح للمستخدم
+            Your account has been created successfully at Rose Store!
+            We're happy to have you with us 🌷
+
+            Best regards,
+            Rose Store Team
+            """
+
+            email = EmailMessage(
+                subject=subject,
+                body=message,
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                to=[user.email],
+            )
+            email.send(fail_silently=False)  # 👈 يرسل فعليًا إلى الإيميل
+            print(f"✅ Email sent successfully to {user.email}")
+
             messages.success(request, f"🎉 Account created successfully! Welcome, {user.username}!")
             return redirect("home")
         else:
@@ -31,7 +44,7 @@ def register_view(request):
     return render(request, "accounts/register.html", {"form": form})
 
 
-# ✅ Login View
+# ✅ Login View (تسجيل الدخول)
 def login_view(request):
     if request.method == "POST":
         form = LoginForm(data=request.POST)
@@ -39,14 +52,26 @@ def login_view(request):
             user = form.get_user()
             login(request, user)
 
-            # ✉️ إرسال رسالة عند تسجيل الدخول
+            # ✉️ إرسال إشعار تسجيل الدخول
             subject = "تم تسجيل الدخول إلى Rose Store 🌼"
-            message = f"Hello {user.username},\n\nYou have successfully logged in to your Rose Store account."
-            from_email = settings.DEFAULT_FROM_EMAIL
-            recipient_list = [user.email]
-            send_mail(subject, message, from_email, recipient_list, fail_silently=True)
+            message = f"""
+            Hello {user.username},
 
-            # ✅ رسالة نجاح داخل الموقع
+            You have successfully logged in to your Rose Store account 🌸
+
+            Best regards,
+            Rose Store Team
+            """
+
+            email = EmailMessage(
+                subject=subject,
+                body=message,
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                to=[user.email],
+            )
+            email.send(fail_silently=False)
+            print(f"✅ Login email sent successfully to {user.email}")
+
             messages.success(request, f"👋 Welcome back, {user.username}!")
             return redirect("home")
         else:
@@ -56,7 +81,7 @@ def login_view(request):
     return render(request, "accounts/login.html", {"form": form})
 
 
-# ✅ Logout View
+# ✅ Logout View (تسجيل الخروج)
 def logout_view(request):
     logout(request)
     messages.info(request, "🚪 You have logged out successfully.")
